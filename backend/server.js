@@ -17,7 +17,7 @@ const app = express();
 
 app.use(helmet());
 app.use(cors({
-  origin: ["http://localhost:5173", "https://disperkim-app.com"],
+  origin: ["http://localhost:5173", "https://disperkim.vercel.app"],
   credentials: true
 }));
 app.use(morgan("dev"));

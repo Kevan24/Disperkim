@@ -1,10 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class',
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
-  theme: { extend: {} },
+  theme: {
+    extend: {
+      colors: {
+        primary: "#1E3A8A",
+        secondary: "#F59E0B",
+        danger: "#DC2626",
+        success: "#16A34A",
+      },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+      },
+    },
+  },
+  darkMode: 'class',
   plugins: [],
-};
+}

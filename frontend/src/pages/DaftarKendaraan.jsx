@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Select, SelectItem } from "@/components/ui/select";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import * as XLSX from "xlsx";
@@ -42,15 +39,12 @@ const DaftarKendaraan = () => {
         item.merek.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-
     if (statusFilter) {
       data = data.filter((item) => item.status === statusFilter);
     }
-
     if (lokasiFilter) {
       data = data.filter((item) => item.lokasi === lokasiFilter);
     }
-
     if (tahunFilter) {
       data = data.filter(
         (item) => item.tahun_dibuat === parseInt(tahunFilter)
@@ -112,39 +106,54 @@ const DaftarKendaraan = () => {
     <div className="p-4 space-y-6">
       <h2 className="text-2xl font-bold">Daftar Kendaraan</h2>
 
+      {/* Filter */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <Input
+        <input
+          type="text"
           placeholder="Cari berdasarkan merek..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          className="border border-gray-300 p-2 rounded"
         />
 
-        <Select onValueChange={setStatusFilter} value={statusFilter}>
-          <SelectItem value="">Semua Status</SelectItem>
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="border border-gray-300 p-2 rounded"
+        >
+          <option value="">Semua Status</option>
           {uniqueValues("status").map((status) => (
-            <SelectItem key={status} value={status}>
+            <option key={status} value={status}>
               {status}
-            </SelectItem>
+            </option>
           ))}
-        </Select>
+        </select>
 
-        <Select onValueChange={setLokasiFilter} value={lokasiFilter}>
-          <SelectItem value="">Semua Lokasi</SelectItem>
+        <select
+          value={lokasiFilter}
+          onChange={(e) => setLokasiFilter(e.target.value)}
+          className="border border-gray-300 p-2 rounded"
+        >
+          <option value="">Semua Lokasi</option>
           {uniqueValues("lokasi").map((lokasi) => (
-            <SelectItem key={lokasi} value={lokasi}>
+            <option key={lokasi} value={lokasi}>
               {lokasi}
-            </SelectItem>
+            </option>
           ))}
-        </Select>
+        </select>
 
-        <Select onValueChange={setTahunFilter} value={tahunFilter}>
-          <SelectItem value="">Semua Tahun</SelectItem>
+        <select
+          value={tahunFilter}
+          onChange={(e) => setTahunFilter(e.target.value)}
+          className="border border-gray-300 p-2 rounded"
+        >
+          <option value="">Semua Tahun</option>
           {uniqueValues("tahun_dibuat").map((tahun) => (
-            <SelectItem key={tahun} value={tahun}>
+            <option key={tahun} value={tahun}>
               {tahun}
-            </SelectItem>
+            </option>
           ))}
-        </Select>
+        </select>
 
         <button
           onClick={handleResetFilter}
@@ -154,6 +163,7 @@ const DaftarKendaraan = () => {
         </button>
       </div>
 
+      {/* Tombol Export */}
       <div className="flex gap-2">
         <button
           onClick={handleExportPDF}
@@ -169,24 +179,26 @@ const DaftarKendaraan = () => {
         </button>
       </div>
 
+      {/* Daftar Kendaraan */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredData.map((item) => (
-          <Card key={item.id}>
-            <CardContent className="p-4 space-y-1">
-              <p>
-                <strong>Merek:</strong> {item.merek}
-              </p>
-              <p>
-                <strong>Status:</strong> {item.status}
-              </p>
-              <p>
-                <strong>Lokasi:</strong> {item.lokasi}
-              </p>
-              <p>
-                <strong>Tahun:</strong> {item.tahun_dibuat}
-              </p>
-            </CardContent>
-          </Card>
+          <div
+            key={item.id}
+            className="bg-white shadow rounded p-4 space-y-1 border"
+          >
+            <p>
+              <strong>Merek:</strong> {item.merek}
+            </p>
+            <p>
+              <strong>Status:</strong> {item.status}
+            </p>
+            <p>
+              <strong>Lokasi:</strong> {item.lokasi}
+            </p>
+            <p>
+              <strong>Tahun:</strong> {item.tahun_dibuat}
+            </p>
+          </div>
         ))}
       </div>
     </div>
