@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
+import Login from "./pages/LoginTemp";
 import Dashboard from "./pages/Dashboard";
 import ManajemenUser from "./pages/ManajemenUser";
 import Unauthorized from "./pages/Unauthorized";
